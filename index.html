@@ -329,12 +329,43 @@
         #backToTop:hover { transform: scale(1.1); }
 
         @media (max-width: 600px) {
+            /* 1. إصلاح الترويسة لتصبح أنيقة وملمومة */
+            .welcome-msg { font-size: 15px; line-height: 1.4; padding: 0 10px; }
+            .welcome-en { font-size: 12px; margin-top: 5px; padding: 0 10px; }
+            .header-contact-btn { 
+                font-size: 12px; 
+                padding: 8px 15px; 
+                width: 85%; /* توحيد العرض ليكون متناسقاً */
+                box-sizing: border-box;
+            }
+
+            /* 2. إعادة الفخامة لشريط الأقسام (تمرير أفقي ناعم جداً) */
+            .categories-bar {
+                flex-wrap: nowrap; /* نمنع تكدس الأزرار فوق بعضها */
+                justify-content: flex-start; /* نبدأ من اليمين */
+                overflow-x: auto; /* نفعل التمرير الجانبي */
+                -webkit-overflow-scrolling: touch; /* حركة تمرير ناعمة للآيفون */
+                padding: 12px 15px;
+                gap: 10px;
+            }
+            
+            /* إخفاء شريط التمرير (Scrollbar) لجمالية أفضل */
+            .categories-bar::-webkit-scrollbar { display: none; }
+            .categories-bar { -ms-overflow-style: none; scrollbar-width: none; }
+
+            .cat-btn {
+                padding: 6px 18px;
+                font-size: 13px;
+            }
+
+            /* 3. تعديل حجم البطاقات والخطوط */
+            .item-grid { grid-template-columns: 1fr; gap: 20px; } 
             .item-image { height: 220px; } 
             .item-name-ar { font-size: 18px; } 
-            .item-name-en { font-size: 15px; } 
+            .item-name-en { font-size: 14px; margin-bottom: 8px; } 
             .container { padding: 15px; }
             .modal-content { max-width: 95%; }
-            .section-title { font-size: 22px; }
+            .section-title { font-size: 20px; margin: 20px 0 15px 0; }
         }
     </style>
 </head>
