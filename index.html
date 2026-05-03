@@ -20,7 +20,6 @@
             --gold-gradient: linear-gradient(135deg, #C5A059 0%, #E8D090 50%, #C5A059 100%);
         }
 
-        /* Default body font to Arial for all Arabic text */
         body { 
             font-family: Arial, Helvetica, sans-serif; 
             background-color: var(--bg-dark); 
@@ -30,13 +29,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Force Cairo font ONLY on English text elements */
         .en-text, .welcome-en, .section-title, .section-subtitle-en, .mini-name-en, .m-name-en, .m-desc-en, 
         .m-allergy, .footer-text, .footer-links a, .header-contact-btn, .cat-btn, .next-section-btn {
             font-family: 'Cairo', sans-serif !important;
         }
 
-        /* Enforce Arial explicitly on Arabic specific elements */
         .ar-text, .welcome-msg, .mini-name-ar, .m-name-ar, .m-desc-ar, .footer-title {
             font-family: Arial, Helvetica, sans-serif !important;
         }
@@ -65,6 +62,48 @@
             white-space: nowrap; direction: ltr;
         }
         .header-contact-btn:hover { background: var(--gold-gradient); color: #000000; border-color: transparent; }
+
+        /* HERO BANNER STYLES */
+        .hero-banner-container {
+            padding: 15px;
+            background-color: var(--bg-dark);
+        }
+        .hero-banner {
+            background: #000;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+            margin: 0 auto;
+            max-width: 500px;
+            padding: 8px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bannerPulse 2s infinite;
+        }
+        .hero-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(197, 160, 89, 0.6);
+        }
+        .hero-banner .en-text {
+            color: var(--gold-light);
+            font-size: 20px;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+            direction: ltr;
+        }
+        .hero-banner .ar-text {
+            color: var(--text-light);
+            font-size: 22px;
+            font-weight: bold;
+            display: block;
+        }
+        @keyframes bannerPulse {
+            0% { box-shadow: 0 0 10px rgba(197, 160, 89, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(197, 160, 89, 0.6); }
+            100% { box-shadow: 0 0 10px rgba(197, 160, 89, 0.3); }
+        }
 
        .categories-bar {
             background-color: rgba(10, 10, 10, 0.98);
@@ -137,6 +176,31 @@
         }
         .item-card:hover { transform: translateY(-4px); border-color: rgba(197, 160, 89, 0.4); }
         
+        /* UPDATED ITEM RIBBON (Dark Gold, Pulses, No Star, Centered & Resized) */
+        .item-card.is-new::before {
+            content: "NEW"; /* Removed star */
+            position: absolute;
+            top: 15px;       /* Adjusted top position to lift the ribbon */
+            right: -35px;    /* Adjusted right position to move the ribbon */
+            width: 140px;    /* Increased width to accommodate larger text */
+            text-align: center;
+            background: linear-gradient(135deg, #996515 0%, #D4AF37 50%, #996515 100%);
+            color: #000;
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 800;
+            font-size: 14px; /* Increased font size for better visibility */
+            padding: 6px 0;  /* Slightly increased padding for a thicker ribbon */
+            transform: rotate(45deg);
+            z-index: 15;
+            animation: ribbonPulse 2s infinite;
+        }
+
+        @keyframes ribbonPulse {
+            0% { filter: brightness(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            50% { filter: brightness(1.2); box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+            100% { filter: brightness(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
         .item-image { 
             width: 100%; height: 160px; object-fit: contain; 
             padding: 5px; box-sizing: border-box; background-color: rgba(255, 255, 255, 0.01); 
@@ -158,12 +222,12 @@
             border-top: 1px solid rgba(197, 160, 89, 0.1);
         }
         .mini-name-en { 
-            font-size: 14px; color: var(--text-light); font-weight: 700;
+            font-size: 16px; color: var(--text-light); font-weight: 700;
             direction: ltr; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
             margin-bottom: 4px; line-height: 1.3;
         }
         .mini-name-ar { 
-            font-size: 12px; font-weight: bold; color: var(--gold-primary); 
+            font-size:20px; font-weight: bold; color: var(--gold-primary); 
             display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
         }
 
@@ -206,8 +270,8 @@
         .m-name-en { font-size: 22px; font-weight: 800; color: var(--text-light); margin-bottom: 8px; direction: ltr; text-align: left; display: block; line-height: 1.3;}
         .m-desc-en { font-size: 15px; line-height: 1.6; color: #ddd; direction: ltr; text-align: left; display: block; margin-bottom: 20px; }
         
-        .m-name-ar { font-size: 17px; font-weight: bold; color: var(--gold-light); margin-bottom: 5px; direction: rtl; text-align: right; display: block; }
-        .m-desc-ar { font-size: 14px; line-height: 1.5; color: var(--gold-primary); direction: rtl; text-align: right; display: block; margin-bottom: 25px; }
+        .m-name-ar { font-size: 26px; font-weight: bold; color: var(--gold-light); margin-bottom: 5px; direction: rtl; text-align: right; display: block; }
+        .m-desc-ar { font-size: 18px; line-height: 1.5; color: var(--gold-primary); direction: rtl; text-align: right; display: block; margin-bottom: 25px; }
         
         .m-allergy { 
             background: rgba(226, 135, 67, 0.1); border: 1px dashed #E28743; 
@@ -267,8 +331,8 @@
         @media (max-width: 600px) {
             header { padding: 10px; }
             .logo { max-width: 110px; margin-bottom: 5px; }
-            .welcome-en { font-size: 13px; white-space: normal; } 
-            .welcome-msg { font-size: 11px; white-space: normal; }
+            .welcome-en { font-size: 16px; white-space: normal; } 
+            .welcome-msg { font-size: 18px; white-space: normal; }
             .header-contact-btn { font-size: 11px; padding: 6px 12px; }
             
             .categories-bar { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; padding: 10px 15px; gap: 8px; direction: ltr; }
@@ -291,12 +355,21 @@
 
 <header>
     <img src="logo.webp" alt="Kweider Logo" class="logo" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/150/000000/C5A059?text=KWEIDER'">
-    <div class="welcome-en">Enjoy your choice while our team takes care of every detail to ensure your complete satisfaction.</div>
-    <div class="welcome-msg">دَلِّلْ حَوَاسَّكَ بِاخْتِيَارَاتِكَ، وَدَعْ فَرِيقَنَا يَعْتَنِي بِأَدَقِّ تَفَاصِيلِ رِضَاكَ.</div>
+    <div class="welcome-en">“Browse our selection, then call your waiter when ready.”
+</div>
+    <div class="welcome-msg">اطلع على تشكيلتنا، ثم أطلب الموظف عندما  تكون جاهز .</div>
     <a href="https://wa.me/447440444500" class="header-contact-btn" target="_blank">
         🌟 Contact Management | تواصل مع الإدارة 
     </a>
 </header>
+
+<!-- THE HERO BANNER -->
+<div class="hero-banner-container">
+    <div class="hero-banner" onclick="goToSection('special-offers')">
+        <span class="en-text">🌟 Special Offers: Tap here to discover our daily combos!</span>
+        <span class="ar-text">عروض اليوم: اضغط هنا لاكتشاف التوفير! 🌟</span>
+    </div>
+</div>
 
 <nav class="categories-bar">
     <button class="cat-btn active" onclick="filterMenu('breakfast', this)">Breakfast</button>
@@ -308,6 +381,88 @@
 </nav>
 
 <div class="container" id="main-menu">
+
+    <!-- SPECIAL OFFERS SECTION -->
+    <div id="special-offers" class="menu-section">
+        <h2 class="section-title">
+            🎁 Special Offers
+            <span class="section-subtitle-en">Irresistible combos crafted just for you.</span>
+        </h2>
+        <div class="item-grid">
+            
+            <!-- 1. عرض الكنافة والقهوة -->
+            <div class="item-card is-new" onclick="openDetails(this)" 
+                data-name-ar="عرض الكنافة مع القهوة العربية" 
+                data-name-en="Premium Classic Kunafa & Coffee Combo" 
+                data-desc-ar="استمتع بقطعة من الكنافة الدمشقية المقرمشة مع فنجان من القهوة العربية الأصيلة بالهيل، لتبدأ يومك بمزاج راقٍ." 
+                data-desc-en="Enjoy a piece of crispy Damascene Kunafa paired perfectly with a cup of authentic cardamom Arabic coffee." 
+                data-price="£4.99" 
+                data-img="Classic Kunafa & Coffee Combo.webp" 
+                data-allergy="Contains: Milk, Gluten (Wheat), Nuts (Pistachio).">
+                <span class="item-price">£4.99</span>
+                <img src="Classic Kunafa & Coffee Combo.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Offer'">
+                <div class="mini-info">
+                    <div class="mini-name-en">Premium Classic Kunafa & Coffee Combo</div>
+                    <div class="mini-name-ar">عرض الكنافة والقهوة</div>
+                </div>
+            </div>
+
+            <!-- 2. عرض هريسة اللوز -->
+            <div class="item-card is-new" onclick="openDetails(this)" 
+                data-name-ar="عرض الصالة: 1KG هريسة باللوز" 
+                data-name-en="In-Store Offer: 1KG Almond Harisa" 
+                data-desc-ar="استفد من عروض الصالة الحصرية! احصل على كيلو من هريسة اللوز الدمشقية الفاخرة بسعر 10 باوند فقط بدلاً من 15 باوند." 
+                data-desc-en="Take advantage of our exclusive in-store offers! Get 1KG of premium Damascene Almond Harisa for only £10 instead of £15." 
+                data-price="£10.00 <del style='font-size:10px; color:#aaa; margin-left:4px;'>£15.00</del>" 
+                data-img="1KG Almond Harisa.webp" 
+                data-allergy="Contains: Gluten (Semolina), Milk (Ghee), Nuts (Almond).">
+                <span class="item-price">£10.00 <del style="font-size:10px; color:#aaa; margin-left:4px;">£15</del></span>
+                <img src="1KG Almond Harisa.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Offer'">
+                <div class="mini-info">
+                    <div class="mini-name-en">In-Store Offer: 1KG Almond Harisa</div>
+                    <div class="mini-name-ar"> الآن ...عروض الصالة</div>
+                </div>
+            </div>
+
+            <!-- 3. عرض بقلاوة بالقشطة -->
+            <div class="item-card is-new" onclick="openDetails(this)" 
+                data-name-ar="عرض الصالة: 1KG بقلاوة بالقشطة" 
+                data-name-en="In-Store Offer: 1KG Cream Baklava" 
+                data-desc-ar="استفد من عروض الصالة المميزة! كيلو من البقلاوة المقرمشة المحشوة بالقشطة الطازجة بسعر 17 باوند فقط بدلاً من 20 باوند." 
+                data-desc-en="Exclusive in-store offer! 1KG of crispy Baklava filled with fresh cream for only £17 instead of £20." 
+                data-price="£17.00 <del style='font-size:10px; color:#aaa; margin-left:4px;'>£20.00</del>" 
+                data-img="1KG Cream Baklava.webp" 
+                data-allergy="Contains: Gluten (Wheat), Milk (Cream, Ghee), Nuts.">
+                <span class="item-price">£17.00 <del style="font-size:10px; color:#aaa; margin-left:4px;">£20</del></span>
+                <img src="1KG Cream Baklava.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Offer'">
+                <div class="mini-info">
+                    <div class="mini-name-en">In-Store Offer: 1KG Cream Baklava</div>
+                    <div class="mini-name-ar"> الآن ...عروض الصالة </div>
+                </div>
+            </div>
+
+            <!-- 4. قريبا -->
+            <div class="item-card" onclick="openDetails(this)" 
+                data-name-ar="قريباً..عروض العيد" 
+                data-name-en="Coming Soon... New Offer" 
+                data-desc-ar="ترقبوا عرضنا العيد قريباً جداً. نحضر لكم مفاجأة تليق بذوقكم الرفيع." 
+                data-desc-en="Stay tuned for our next offer very soon. We are preparing a surprise that suits your refined taste." 
+                data-price="-" 
+                data-img="coming soon.webp" 
+                data-allergy="None">
+                <span class="item-price">-</span>
+                <img src="coming soon.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Coming+Soon'">
+                <div class="mini-info">
+                    <div class="mini-name-en">Coming Soon... New Offer</div>
+                    <div class="mini-name-ar">قريباً... عرض جديد</div>
+                </div>
+            </div>
+            
+        </div>
+        <button class="next-section-btn" onclick="goToSection('breakfast')">
+            Next: Breakfast <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
 
     <div id="breakfast" class="menu-section">
        <h2 class="section-title">
@@ -575,7 +730,7 @@
                     <div class="mini-name-ar">كنافة بالجوز</div>
                 </div>
             </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="راحة بالقشطة" data-name-en="Premium Kishta Rahat Delight" data-desc-ar="راحة فاخرة محشوة بالقِشطة الطازجة، بقوام ناعم ونكهة غنية تذوب في الفم." data-desc-en="Luxurious Turkish delight stuffed with fresh cream, offering a smooth texture and rich flavor that melts in the mouth." data-price="£6.00 <small>(2 Pcs)</small>" data-img="Kishta Rahat Delight.webp" data-allergy="Contains: Milk, Gluten (Wheat).">
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="راحة بالقشطة" data-name-en="Premium Kishta Rahat Delight" data-desc-ar="راحة فاخرة محشوة بالقِشطة الطازجة، بقوام ناعم ونكهة غنية تذوب في الفم." data-desc-en="Luxurious Turkish delight stuffed with fresh cream, offering a smooth texture and rich flavor that melts in the mouth." data-price="£6.00 <small>(2 Pcs)</small>" data-img="Kishta Rahat Delight.webp" data-allergy="Contains: Milk, Gluten (Wheat).">
                 <span class="item-price">£6.00</span>
                 <img src="Kishta Rahat Delight.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Rahat'">
                 <div class="mini-info">
@@ -583,7 +738,7 @@
                     <div class="mini-name-ar">راحة بالقشطة</div>
                 </div>
             </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="نمورة بالقشطة" data-name-en="Premium Cream Namura" data-desc-ar="٤ قطع من النمورة الذهبية المخبوزة بالسمن الأصيل، محشوة بالقشطة الفاخرة لتذوب في الفم." data-desc-en="Golden Namura baked with authentic ghee, filled with premium cream to melt perfectly in your mouth." data-price="£4.00 <small>(4 Pcs)</small>" data-img="namura.webp" data-allergy="Contains: Milk, Gluten (Wheat).">
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="نمورة بالقشطة" data-name-en="Premium Cream Namura" data-desc-ar="٤ قطع من النمورة الذهبية المخبوزة بالسمن الأصيل، محشوة بالقشطة الفاخرة لتذوب في الفم." data-desc-en="Golden Namura baked with authentic ghee, filled with premium cream to melt perfectly in your mouth." data-price="£4.00 <small>(4 Pcs)</small>" data-img="namura.webp" data-allergy="Contains: Milk, Gluten (Wheat).">
                 <span class="item-price">£4.00</span>
                 <img src="namura.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Namura'">
                 <div class="mini-info">
@@ -724,7 +879,7 @@
         </h2>
         <div class="item-grid">
             <!-- COLD DRINKS -->
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="ميلك شيك بوظة عربي دق" data-name-en="Premium Syrian ice cream milkshake" data-desc-ar="ميلك شيك بوظة شامية أصيلة، بمزيج غني وكريمي يمنحك طعماً فاخراً ولمسة تقليدية لا تُقاوم." data-desc-en="Authentic Damascene ice cream milkshake, a rich and creamy blend offering a luxurious taste and irresistible traditional touch." data-price="£6.00" data-img="Syrian ice cream milkshake.webp" data-allergy="Contains: Milk.">
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="ميلك شيك بوظة عربي دق" data-name-en="Premium Syrian ice cream milkshake" data-desc-ar="ميلك شيك بوظة شامية أصيلة، بمزيج غني وكريمي يمنحك طعماً فاخراً ولمسة تقليدية لا تُقاوم." data-desc-en="Authentic Damascene ice cream milkshake, a rich and creamy blend offering a luxurious taste and irresistible traditional touch." data-price="£6.00" data-img="Syrian ice cream milkshake.webp" data-allergy="Contains: Milk.">
                 <span class="item-price">£6.00</span>
                 <img src="Syrian ice cream milkshake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Syrian+Milkshake'">
                 <div class="mini-info">
@@ -772,7 +927,7 @@
                     <div class="mini-name-ar">ماتشا بارد</div>
                 </div>
             </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="شاي مثلج (آيس تي)" data-name-en="Premium Classic Iced Tea" data-desc-ar="شاي بارد منعش يقدم فوق مكعبات الثلج، الخيار الأمثل لتبريد حواسك." data-desc-en="A refreshing cold tea served over ice cubes, the perfect choice to cool your senses." data-price="£3.00" data-img="iced-tea.webp" data-allergy="Free from common allergens.">
+           <div class="item-card" onclick="openDetails(this)" data-name-ar="شاي مثلج (آيس تي)" data-name-en="Premium Classic Iced Tea" data-desc-ar="شاي بارد منعش يقدم فوق مكعبات الثلج، الخيار الأمثل لتبريد حواسك." data-desc-en="A refreshing cold tea served over ice cubes, the perfect choice to cool your senses." data-price="£3.00" data-img="iced-tea.webp" data-allergy="Free from common allergens.">
                 <span class="item-price">£3.00</span>
                 <img src="iced-tea.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Iced+Tea'">
                 <div class="mini-info">
@@ -886,7 +1041,7 @@
                     <div class="mini-name-ar">إبريق شاي بالنعناع</div>
                 </div>
             </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="ماتشا (حار)" data-name-en="Premium Classic Matcha (Hot)" data-desc-ar="شاي الماتشا الياباني الفاخر المحضر بعناية ليمنحك الانتعاش والطاقة." data-desc-en="Premium Japanese Matcha tea carefully prepared to give you refreshment and energy." data-price="£5.50" data-img="classic-matcha.webp" data-allergy="Contains: Milk.">
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="ماتشا (حار)" data-name-en="Premium Classic Matcha (Hot)" data-desc-ar="شاي الماتشا الياباني الفاخر المحضر بعناية ليمنحك الانتعاش والطاقة." data-desc-en="Premium Japanese Matcha tea carefully prepared to give you refreshment and energy." data-price="£5.50" data-img="classic-matcha.webp" data-allergy="Contains: Milk.">
                 <span class="item-price">£5.50</span>
                 <img src="classic-matcha.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Classic+Matcha'">
                 <div class="mini-info">
@@ -920,7 +1075,7 @@
                     <div class="mini-name-ar">إسبريسو غني</div>
                 </div>
             </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="دبل إسبريسو غني" data-name-en="Premium double Roasted Espresso" data-desc-ar="جرعة مركزة وغنية من القهوة النقية المحمصة بامتياز." data-desc-en="A concentrated, rich shot of perfectly roasted pure coffee." data-price="£3.50" data-img="espresso.webp" data-allergy="Free from common allergens.">
+            <div class="item-card" onclick="openDetails(this)" data-name-ar="دبل إسبريسو غني" data-name-en="Premium double Roasted Espresso" data-desc-ar="جرعة مركزة وغنية من القهوة النقية المحمصة بامتياز." data-desc-en="A concentrated, rich shot of perfectly roasted pure coffee." data-price="£3.50" data-img="doubleEspresso.webp" data-allergy="Free from common allergens.">
                 <span class="item-price">£3.50</span>
                 <img src="doubleEspresso.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Espresso'">
                 <div class="mini-info">
@@ -1008,8 +1163,8 @@
                 </div>
             </div>
             
-            <!-- 3. كاسة دبي -->
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="كاسة دبي" data-name-en="Premium Pistachio Dubai Cup" data-desc-ar="كاسة مليئة بطبقات من الشوكولاتة الفاخرة والكنافة المقرمشة مع كريمة الفستق الحلبي." data-desc-en="A cup filled with layers of premium chocolate, crispy Kunafa, and pistachio cream." data-price="£7.00 <small>(1 Pc)</small>" data-img="dubai-cup.webp" data-allergy="Contains: Milk, Nuts (Pistachio), Gluten (Wheat), Soya.">
+            <!-- 3. كاسة دبي (Example of is-new class) -->
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كاسة دبي" data-name-en="Premium Pistachio Dubai Cup" data-desc-ar="كاسة مليئة بطبقات من الشوكولاتة الفاخرة والكنافة المقرمشة مع كريمة الفستق الحلبي." data-desc-en="A cup filled with layers of premium chocolate, crispy Kunafa, and pistachio cream." data-price="£7.00 <small>(1 Pc)</small>" data-img="dubai-cup.webp" data-allergy="Contains: Milk, Nuts (Pistachio), Gluten (Wheat), Soya.">
                 <span class="item-price">£7.00</span>
                 <img src="dubai-cup.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Dubai+Cup'">
                 <div class="mini-info">
@@ -1028,8 +1183,8 @@
                 </div>
             </div>
 
-            <!-- 5. كنافة مانجو -->
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="كنافة بالمانجو" data-name-en="Premium Mango Kunafa Dessert" data-desc-ar="طبقات من الكنافة الذهبية المقرمشة تتخللها كريمة غنية وقطع المانجو الاستوائية الطازجة." data-desc-en="Layers of crispy golden Kunafa interspersed with rich cream and fresh tropical mango pieces." data-price="£5.50 <small>(1 Pc)</small>" data-img="mango-kunafa.webp" data-allergy="Contains: Milk, Gluten (Wheat).">
+            <!-- 5. كنافة مانجو (Example of is-new class) -->
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كنافة بالمانجو" data-name-en="Premium Mango Kunafa Dessert" data-desc-ar="طبقات من الكنافة الذهبية المقرمشة تتخللها كريمة غنية وقطع المانجو الاستوائية الطازجة." data-desc-en="Layers of crispy golden Kunafa interspersed with rich cream and fresh tropical mango pieces." data-price="£5.50 <small>(1 Pc)</small>" data-img="mango-kunafa.webp" data-allergy="Contains: Milk, Gluten (Wheat).">
                 <span class="item-price">£5.50</span>
                 <img src="mango-kunafa.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Mango+Kunafa'">
                 <div class="mini-info">
@@ -1109,7 +1264,7 @@
             </div>
 
             <!-- 13. ملك كيك زعفران -->
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="ميلك كيك بالزعفران" data-name-en="Premium Saffron Milk Cake" data-desc-ar="كيكة فاخرة مشبعة بحليب الزعفران الأصلي، تقدم تجربة ملكية مع كل قضمة بفضل خيوط الزعفران العطرية." data-desc-en="A luxurious cake soaked in authentic saffron milk, offering a royal experience with every bite thanks to aromatic saffron threads." data-price="£5.50 <small>(1 Pc)</small>" data-img="saffron-milk-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="ميلك كيك بالزعفران" data-name-en="Premium Saffron Milk Cake" data-desc-ar="كيكة فاخرة مشبعة بحليب الزعفران الأصلي، تقدم تجربة ملكية مع كل قضمة بفضل خيوط الزعفران العطرية." data-desc-en="A luxurious cake soaked in authentic saffron milk, offering a royal experience with every bite thanks to aromatic saffron threads." data-price="£5.50 <small>(1 Pc)</small>" data-img="saffron-milk-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
                 <span class="item-price">£5.50</span>
                 <img src="saffron-milk-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Milk+Cake'">
                 <div class="mini-info">
@@ -1119,7 +1274,7 @@
             </div>
 
             <!-- 14. ملك كيك بيسكوف -->
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="ميلك كيك كريم بيسكوف" data-name-en="Premium Biscoff Cream Milk Cake" data-desc-ar="مزيج ساحر من الكيك الهش وحليب اللوتس، مع تغطية غنية بكريمة بسكويت بيسكوف المكرملة." data-desc-en="A magical blend of soft cake and Lotus milk, richly covered with caramelized Biscoff biscuit cream." data-price="£5.50 <small>(1 Pc)</small>" data-img="biscoff-milk-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
+            <div class="item-card" onclick="openDetails(this)" data-name-ar="ميلك كيك كريم بيسكوف" data-name-en="Premium Biscoff Cream Milk Cake" data-desc-ar="مزيج ساحر من الكيك الهش وحليب اللوتس، مع تغطية غنية بكريمة بسكويت بيسكوف المكرمل." data-desc-en="A magical blend of soft cake and Lotus milk, richly covered with caramelized Biscoff biscuit cream." data-price="£5.50 <small>(1 Pc)</small>" data-img="biscoff-milk-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
                 <span class="item-price">£5.50</span>
                 <img src="biscoff-milk-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Milk+Cake'">
                 <div class="mini-info">
@@ -1127,7 +1282,7 @@
                     <div class="mini-name-ar">ميلك كيك كريم بيسكوف</div>
                 </div>
             </div>
-                     
+          
         </div>
         <button class="next-section-btn" onclick="goToSection('fruit-juice')">
             Next: Fruits & Juices <i class="fas fa-arrow-right"></i>
