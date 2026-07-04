@@ -29,12 +29,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .en-text, .welcome-en, .section-title, .section-subtitle-en, .mini-name-en, .m-name-en, .m-desc-en, 
-        .m-allergy, .footer-text, .footer-links a, .header-contact-btn, .cat-btn, .next-section-btn {
+        .en-text, .welcome-en, .section-subtitle-en, .mini-name-en, .m-name-en, .m-desc-en, 
+        .m-allergy, .footer-text, .footer-links a, .header-contact-btn, .cat-btn, .next-section-btn, .sub-section-title {
             font-family: 'Cairo', sans-serif !important;
         }
 
-        .ar-text, .welcome-msg, .mini-name-ar, .m-name-ar, .m-desc-ar, .footer-title {
+        .ar-text, .welcome-msg, .mini-name-ar, .m-name-ar, .m-desc-ar, .footer-title, .section-title {
             font-family: Arial, Helvetica, sans-serif !important;
         }
 
@@ -147,14 +147,53 @@
         
         .section-title { 
             color: var(--gold-primary); border-left: 4px solid var(--gold-primary); border-right: none; 
-            padding-left: 15px; margin: 40px 0 25px 0; font-size: 15px; 
+            padding-left: 15px; margin: 40px 0 25px 0; font-size: 20px; 
             font-weight: 800; line-height: 1.4; display: flex; flex-direction: column; gap: 5px;
             direction: ltr; text-align: left;
         }
 
         .section-subtitle-en {
-            font-size: 16px; color: var(--gold-light); 
+            font-size: 14px; color: var(--gold-light); 
             direction: ltr; text-align: left; font-weight: 600; letter-spacing: 0.5px;
+        }
+
+        /* --- NEW SUB-NAVIGATION STYLES --- */
+        .sub-categories-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .sub-cat-btn {
+            background: transparent;
+            border: 2px solid var(--gold-primary);
+            border-radius: 12px;
+            color: var(--gold-primary);
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+            max-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .sub-cat-btn:hover, .sub-cat-btn.active {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
+            transform: translateY(-2px);
+        }
+        .sub-cat-btn .ar-text {
+            font-size: 16px; font-weight: bold;
+        }
+        .sub-cat-btn.active .ar-text, .sub-cat-btn.active .en-text {
+            color: #000 !important;
+        }
+        .sub-menu-section {
+            animation: fadeIn 0.4s ease;
         }
         
         .item-grid { 
@@ -178,7 +217,6 @@
         }
         .item-card:hover { transform: translateY(-4px); border-color: rgba(197, 160, 89, 0.4); }
         
-        /* UPDATED ITEM RIBBON */
         .item-card.is-new::before {
             content: "NEW"; 
             position: absolute;
@@ -234,7 +272,7 @@
         }
         
         .mini-name-ar { 
-            font-size: 18px; 
+            font-size: 16px; 
             font-weight: bold; 
             color: var(--gold-primary); 
             width: 100%;
@@ -361,6 +399,10 @@
             .container { padding: 15px; }
             .section-title { font-size: 22px; margin: 20px 0 15px 0; }
             .section-subtitle-en { font-size: 14px; }
+            
+            .sub-categories-container { gap: 10px; }
+            .sub-cat-btn { padding: 10px 15px; }
+            .sub-cat-btn .ar-text { font-size: 14px; }
         }
     </style>
 </head>
@@ -383,7 +425,7 @@
 </div>
 
 <nav class="categories-bar">
-    <button class="cat-btn active" onclick="filterMenu('breakfast', this)">Breakfast</button>
+    <button class="cat-btn active" onclick="filterMenu('damascene-dishes', this)">Damascene Dishes</button>
     <button class="cat-btn" onclick="filterMenu('sweets-merged', this)">Sweets</button>
     <button class="cat-btn" onclick="filterMenu('drinks-merged', this)">Drinks</button>
     <button class="cat-btn" onclick="filterMenu('cake-ice', this)">Cake & Ice Cream</button>
@@ -465,218 +507,302 @@
             </div>
             
         </div>
-        <button class="next-section-btn" onclick="goToSection('breakfast')">
-            Next: Breakfast <i class="fas fa-arrow-right"></i>
+        <button class="next-section-btn" onclick="goToSection('damascene-dishes')">
+            Next: Damascene Dishes <i class="fas fa-arrow-right"></i>
         </button>
     </div>
 
-    <div id="breakfast" class="menu-section">
+    <!-- UPDATED DAMASCENE DISHES SECTION WITH SUB-TABS -->
+    <div id="damascene-dishes" class="menu-section">
        <h2 class="section-title">
-          .جميع الأطباق تحتوي على مواد مسببة للحساسية
-            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens.Please inform staff of any dietary needs.</span>
+          جميع الأطباق تحتوي على مواد مسببة للحساسية
+            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens. Please inform staff of any dietary needs.</span>
         </h2>
-        <div class="item-grid">
-  <div class="item-card" onclick="openDetails(this)" data-name-ar="اختيار الشيف  " data-name-en="Chef’s Selection" data-desc-ar="فتة حمص فاخرة مع مخلل مشكل وشاي شرقي أصيل." data-desc-en="chickpea fatteh with mixed pickles and authentic oriental tea." data-price="£8.00" data-img="Chef’s Selection.webp" data-allergy="Contains: Gluten (Wheat), Milk (Ghee/Yogurt), Sesame, Nuts.">
-                <span class="item-price">£8.00</span>
-                <img src="Chef’s Selection.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Chef+Selection'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Chef’s Selection</div>
-                    <div class="mini-name-ar">اختيار الشيف </div>
-                </div>
-            </div>
-  <div class="item-card" onclick="openDetails(this)" data-name-ar="طبق اليوم" data-name-en="Dish of the Day" data-desc-ar="فول بالزيت مع مخلل مشكل وشاي شرقي أصيل." data-desc-en="Fava beans with olive oil, mixed pickles, and authentic oriental tea." data-price="£8.00" data-img="Chef’s Selection2.webp" data-allergy="Contains: Cereals containing Gluten (Wheat). May contain: Mustard, Sulphites, Sesame.">
-                <span class="item-price">£8.00</span>
-                <img src="Chef’s Selection2.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Dish+Of+The+Day'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Dish of the Day</div>
-                    <div class="mini-name-ar">طبق اليوم</div>
-                </div>
-            </div>
-<div class="item-card" onclick="openDetails(this)" data-name-ar="تشكيلة فاخرة  لشخص واحد." data-name-en=" Single‑Serving Selection" data-desc-ar="تجربة أصيلة تجمع نكهات المطبخ الدمشقي في تقديم فاخر لشخص واحد." data-desc-en="An authentic experience offering a refined selection of Damascene flavors." data-price="£7.00" data-img=" Single‑Serving Selection.webp" data-allergy="Gluten (Wheat), Milk (Ghee/Yogurt), Sesame,">
-                <span class="item-price">£7.00</span>
-                <img src=" Single‑Serving Selection.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Single+Selection'">
-                <div class="mini-info">
-                    <div class="mini-name-en"> Single‑Serving Selection</div>
-                    <div class="mini-name-ar">تشكيلة فاخرة  لشخص واحد.</div>
-                </div>
-            </div>
-<div class="item-card" onclick="openDetails(this)" data-name-ar="التشكيلة الفاخرة لشخصين  " data-name-en="Damascene Premium Set for Two " data-desc-ar="تجربة راقية تتضمن تشكيلة أنيقة من النكهات الدمشقية." data-desc-en="A refined experience featuring an elegant selection of Damascene flavors." data-price="£13.00" data-img="2 Serving Selection.webp" data-allergy="Gluten (Wheat), Milk (Ghee/Yogurt), Sesame,">
-                <span class="item-price">£13.00</span>
-                <img src="2 Serving Selection.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Set+For+Two'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Damascene Premium Set for Two </div>
-                    <div class="mini-name-ar">التشكيلة الفاخرة لشخصين  </div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="فتة بالزيت (تسقية)" data-name-en="Olive Oil Tesqiyeh" data-desc-ar="تسقية دمشقية أصيلة بالحمص والخبز المحمص، مغمورة بسخاء بزيت الزيتون البكر." data-desc-en="Authentic Damascene Tesqiyeh with chickpeas and toasted bread, generously drizzled with extra virgin olive oil." data-price="£7.00" data-img="Olive Oil Tesqiyeh.webp" data-allergy="Contains: Gluten (Wheat), Sesame.">
-                <span class="item-price">£7.00</span>
-                <img src="Olive Oil Tesqiyeh.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Tesqiyeh'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Olive Oil Tesqiyeh</div>
-                    <div class="mini-name-ar">فتة بالزيت (تسقية)</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="فتة بالسمنة والمكسرات" data-name-en="Ghee & Nuts Fatteh" data-desc-ar="فتة حمص دافئة باللبن، تتوجها طشة السمن الأصيل والمكسرات المحمصة المقرمشة." data-desc-en="Warm chickpea Fatteh with yogurt, crowned with sizzling authentic ghee and roasted crunchy nuts." data-price="£8.00" data-img="Nuts Fatteh.webp" data-allergy="Contains: Gluten (Wheat), Milk (Ghee/Yogurt), Sesame, Nuts.">
-                <span class="item-price">£8.00</span>
-                <img src="Nuts Fatteh.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Fatteh'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Ghee & Nuts Fatteh</div>
-                    <div class="mini-name-ar">فتة بالسمنة والمكسرات</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="فول بالزيت" data-name-en="Olive Oil Foul" data-desc-ar="فول مدمس محضر بالطريقة الشامية التقليدية، يقدم مع زيت الزيتون البكر والليمون المنعش." data-desc-en="Traditional Damascene-style fava beans, served with extra virgin olive oil and refreshing lemon." data-price="£7.00" data-img="Olive Oil Foul.webp" data-allergy="Free from common allergens.">
-                <span class="item-price">£7.00</span>
-                <img src="Olive Oil Foul.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Foul'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Olive Oil Foul</div>
-                    <div class="mini-name-ar">فول بالزيت</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="فول باللبن" data-name-en="Yogurt Foul" data-desc-ar="فول مدمس دافئ ممزوج بطحينة اللبن الغنية والثوم ولمسة من زيت الزيتون." data-desc-en="Warm fava beans beautifully blended with a rich yogurt-tahini sauce, garlic, and a touch of olive oil." data-price="£8.00" data-img="Yogurt Foul.webp" data-allergy="Contains: Gluten (Wheat), Milk (Ghee/Yogurt), Sesame (Tahini), Nuts.">
-                <span class="item-price">£8.00</span>
-                <img src="Yogurt Foul.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Foul'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Yogurt Foul</div>
-                    <div class="mini-name-ar">فول باللبن</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="حمص بالطحينة (مسبحة)" data-name-en="Tahini Musabaha" data-desc-ar="مسبحة دمشقية كريمية غنية بالطحينة وحبات الحمص الكاملة، مزينة بزيت الزيتون." data-desc-en="Creamy Damascene Musabaha rich in tahini and whole chickpeas, beautifully garnished with olive oil." data-price="£3.50" data-img="Tahini Musabaha.webp" data-allergy="Contains: Sesame (Tahini), Gluten (Wheat - from bread).">
-                <span class="item-price">£3.50</span>
-                <img src="Tahini Musabaha.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Musabaha'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Tahini Musabaha</div>
-                    <div class="mini-name-ar">حمص بالطحينة (مسبحة)</div>
-                </div>
-            </div>
-             <div class="item-card" onclick="openDetails(this)" data-name-ar="لبنة طازجة" data-name-en="Olive Oil Labneh" data-desc-ar="لبنة بلدية طازجة وناعمة، تقدم مع زيت الزيتون البكر لتجربة فطور خفيفة وصحية." data-desc-en="Smooth, freshly strained Labneh, served with extra virgin olive oil for a light and healthy breakfast experience." data-price="£3.50" data-img="Olive Oil Labneh.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
-                <span class="item-price">£3.50</span>
-                <img src="Olive Oil Labneh.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Labneh'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Olive Oil Labneh</div>
-                    <div class="mini-name-ar">لبنة طازجة</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="جبنة بيضاء بلدية" data-name-en="Authentic White Cheese" data-desc-ar="شرائح من الجبنة البلدية البيضاء الطازجة، تذوب في الفم بنكهتها السورية الأصيلة." data-desc-en="Slices of fresh, traditional white cheese, melting in your mouth with its authentic flavor." data-price="£3.50" data-img="Authentic White Cheese.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
-                <span class="item-price">£3.50</span>
-                <img src="Authentic White Cheese.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=White+Cheese'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Authentic White Cheese</div>
-                    <div class="mini-name-ar">جبنة بيضاء بلدية</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="جبنة شلل" data-name-en="Nigella Shallal Cheese" data-desc-ar="خيوط جبنة الشلل السورية المجدولة بعناية، والمزينة بحبة البركة السوداء العطرية." data-desc-en="Meticulously braided strings of Syrian Shallal cheese, beautifully garnished with nigella seeds." data-price="£3.50" data-img="Shallal Cheese.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
-                <span class="item-price">£3.50</span>
-                <img src="Shallal Cheese.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Shallal+Cheese'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Nigella Shallal Cheese</div>
-                    <div class="mini-name-ar">جبنة شلل</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar=" قطع 3 جبنة حلومي مقلية" data-name-en="Fried Halloumi Cheese" data-desc-ar="شرائح من جبنة الحلومي المقلية للون الذهبي، مقرمشة من الخارج ودافئة وطرية من الداخل." data-desc-en="Slices of Halloumi cheese fried to a golden crisp, crunchy on the outside and soft on the inside." data-price="£3.50" data-img="Halloumi.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
-                <span class="item-price">£3.50</span>
-                <img src="Halloumi.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Fried+Halloumi'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Fried Halloumi Cheese</div>
-                    <div class="mini-name-ar">جبنة حلومي مقلية</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="زيتون أخضر" data-name-en="Natural Green Olives" data-desc-ar="حبات الزيتون الأخضر الشامي المنتقاة بعناية، متبلة بخلطة خفيفة ومشهية." data-desc-en="Carefully selected Damascene green olives, lightly marinated for an appetizing flavor." data-price="£3.50" data-img="Green Olives.webp" data-allergy="Free from common allergens. Contains Gluten (Wheat) from bread.">
-                <span class="item-price">£3.50</span>
-                <img src="Green Olives.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Green+Olives'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Natural Green Olives</div>
-                    <div class="mini-name-ar">زيتون أخضر</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="زيتون أسود" data-name-en="Natural Black Olives" data-desc-ar="زيتون أسود معتق وغني بالنكهات، يكمل مائدة الإفطار الدمشقية بامتياز." data-desc-en="Rich, aged black olives that perfectly complement the authentic Damascene breakfast table." data-price="£3.50" data-img="Black Olives.webp" data-allergy="Free from common allergens. Contains Gluten (Wheat) from bread.">
-                <span class="item-price">£3.50</span>
-                <img src="Black Olives.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Black+Olives'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Natural Black Olives</div>
-                    <div class="mini-name-ar">زيتون أسود</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="مكدوس شامي" data-name-en="Walnut Makdous" data-desc-ar="حبات باذنجان صغيرة محشوة بالجوز والفليفلة والثوم، ومغمورة بزيت الزيتون الصافي." data-desc-en="Baby eggplants stuffed with walnuts, capsicum, and garlic, fully submerged in pure olive oil." data-price="£6.00" data-img="Walnut Makdous.webp" data-allergy="Contains: Nuts (Walnut), Gluten (Wheat) from bread.">
-                <span class="item-price">£6.00</span>
-                <img src="Walnut Makdous.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Makdous'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Walnut Makdous</div>
-                    <div class="mini-name-ar">مكدوس شامي</div>
-                </div>
-            </div>
-          <div class="item-card" onclick="openDetails(this)" data-name-ar="زعتر أحمر/أخضر حلبي" data-name-en="Sesame Red/Green Zaatar" data-desc-ar="خلطة الزعتر الأخضر الأصيلة الممزوجة بالسمسم المحمص والسماق لنكهة لا تقاوم." data-desc-en="A classic Aleppian blend of green thyme mixed with roasted sesame seeds and sumac." data-price="£3.50" data-img="Zaatar.webp" data-allergy="Contains: Sesame, Gluten (Wheat - from bread).">
-                <span class="item-price">£3.50</span>
-                <img src="Zaatar.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Green+Zaatar'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Sesame Red/Green Zaatar</div>
-                    <div class="mini-name-ar">زعتر احمر/أخضر حلبي</div>
-                </div>
-            </div>
-          <div class="item-card" onclick="openDetails(this)" data-name-ar="حلاوة بالطحينة مع الزبدة" data-name-en="Butter Tahini Halawa" data-desc-ar="حلاوة طحينية فاخرة تقدم مع قطع الزبدة الطازجة لتجربة فطور حلوة ومغذية." data-desc-en="Luxurious tahini Halawa served with fresh butter cubes for a sweet and nourishing bite." data-price="£3.50" data-img="Tahini Halawa.webp" data-allergy="Contains: Sesame (Tahini), Milk (Butter), Gluten (Wheat - from bread).">
-                <span class="item-price">£3.50</span>
-                <img src="Tahini Halawa.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Halawa'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Butter Tahini Halawa</div>
-                    <div class="mini-name-ar">حلاوة بالطحينة مع الزبدة</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى التوت الشامي" data-name-en="Damascene Berry Jam" data-desc-ar="مربى التوت الشامي الأصلي، مطبوخ بعناية ليحافظ على قوام وحلاوة الحبات الطبيعية." data-desc-en="Authentic Damascene berry jam, carefully cooked to preserve the texture and natural sweetness of the berries." data-price="£3.50" data-img="Berry Jam.webp" data-allergy="Free from common allergens.">
-                <span class="item-price">£3.50</span>
-                <img src="Berry Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Berry+Jam'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Damascene Berry Jam</div>
-                    <div class="mini-name-ar">مربى التوت الشامي</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى المشمش" data-name-en="Syrian Apricot Jam" data-desc-ar="مربى ذهبي محضر من أجود ثمار المشمش السوري بنكهة الصيف الرائعة." data-desc-en="Golden apricot jam prepared from the finest Syrian apricots, capturing the delightful taste of summer." data-price="£3.50" data-img="Apricot Jam.webp" data-allergy="Free from common allergens.">
-                <span class="item-price">£3.50</span>
-                <img src="Apricot Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Apricot+Jam'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Syrian Apricot Jam</div>
-                    <div class="mini-name-ar">مربى المشمش</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى النارنج" data-name-en="Bitter Orange Jam" data-desc-ar="مربى النارنج الدمشقي العريق، توازن مذهل بين الحلاوة ونكهة الحمضيات المنعشة." data-desc-en="Classic Damascene bitter orange jam, offering a stunning balance between sweetness and refreshing citrus flavor." data-price="£5.50" data-img="Bitter Orange Jam.webp" data-allergy="Free from common allergens.">
-                <span class="item-price">£5.50</span>
-                <img src="Bitter Orange Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Bitter+Orange+Jam'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Bitter Orange Jam</div>
-                    <div class="mini-name-ar">مربى النارنج</div>
-                </div>
-            </div>
-            <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى الكباد" data-name-en="Citron Jam" data-desc-ar="مربى الكباد (الأترج) النادر، يقدم نكهة حمضية عطرية فريدة من نوعها وتذوب بالفم." data-desc-en="Rare citron jam, delivering a unique and profoundly aromatic citrus flavor profile." data-price="£5.50" data-img="Citron Jam.webp" data-allergy="Free from common allergens.">
-                <span class="item-price">£5.50</span>
-                <img src="Citron Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Citron+Jam'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Citron Jam</div>
-                    <div class="mini-name-ar">مربى الكباد</div>
-                </div>
-            </div>
- <div class="item-card" onclick="openDetails(this)" data-name-ar="زبدة" data-name-en="Creamy Butter" data-desc-ar="زبدة طازجة غنية لترافق أطباق الفطور المفضلة لديك." data-desc-en="Rich fresh butter to accompany your favorite breakfast dishes." data-price="£1.25" data-img="Butter Creamy.webp" data-allergy="Contains: Milk.">
-                <span class="item-price">£1.25</span>
-                <img src="Butter Creamy.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Butter'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Creamy Butter</div>
-                    <div class="mini-name-ar">زبدة</div>
-                </div>
-            </div>
- <div class="item-card" onclick="openDetails(this)" data-name-ar="مخلل مشكل" data-name-en="Vegetable Mix Pickles" data-desc-ar="مخلل مشكل مقرمش بخلطتنا السورية الخاصة." data-desc-en="Crunchy mixed pickles with our special Syrian blend." data-price="£3.50" data-img="Mix Pickles.webp" data-allergy="May contain traces of celery or mustard.">
-                <span class="item-price">£3.50</span>
-                <img src="Mix Pickles.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Pickles'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Vegetable Mix Pickles</div>
-                    <div class="mini-name-ar">مخلل مشكل</div>
-                </div>
-            </div>
-<div class="item-card" onclick="openDetails(this)" data-name-ar="خضار مشكلة" data-name-en="Vegetable Mix" data-desc-ar="مزيج طازج ومنعش من أجود أنواع الخضروات الموسمية المختارة بعناية." data-desc-en="A fresh and refreshing selection of premium seasonal vegetables, carefully curated." data-price="£3.50" data-img="Vegetable Mix.webp" data-allergy="Free from common allergens.">
-                <span class="item-price">£3.50</span>
-                <img src="Vegetable Mix.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Vegetables'">
-                <div class="mini-info">
-                    <div class="mini-name-en">Vegetable Mix</div>
-                    <div class="mini-name-ar">خضار مشكلة</div>
-                </div>
-            </div>
+        
+        <!-- Interactive Sub-Navigation Buttons -->
+        <div class="sub-categories-container" id="damascene-sub-nav">
+            <button class="sub-cat-btn" onclick="filterSubMenu('sub-breakfast', this)">
+                <span class="ar-text">☀️ الفطور الشامي</span>
+                <span class="en-text" style="font-size: 13px; font-weight: 700; color: var(--text-muted);">Breakfast Selection</span>
+            </button>
+            <button class="sub-cat-btn" onclick="filterSubMenu('sub-dinner', this)">
+                <span class="ar-text">🌙 العشاء الشامي</span>
+                <span class="en-text" style="font-size: 13px; font-weight: 700; color: var(--text-muted);">Dinner Selection</span>
+            </button>
         </div>
+
+        <!-- BREAKFAST SUB-SECTION -->
+        <div id="sub-breakfast" class="sub-menu-section" style="display: none;">
+            <div class="item-grid">
+                <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="اختيار الشيف  " data-name-en="Chef’s Selection" data-desc-ar="فتة حمص فاخرة مع مخلل مشكل وشاي شرقي أصيل." data-desc-en="chickpea fatteh with mixed pickles and authentic oriental tea." data-price="£8.00" data-img="Chef’s Selection.webp" data-allergy="Contains: Gluten (Wheat), Milk (Ghee/Yogurt), Sesame, Nuts.">
+                    <span class="item-price">£8.00</span>
+                    <img src="Chef’s Selection.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Chef+Selection'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Chef’s Selection</div>
+                        <div class="mini-name-ar">اختيار الشيف </div>
+                    </div>
+                </div>
+                <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="طبق اليوم" data-name-en="Dish of the Day" data-desc-ar="فول بالزيت مع مخلل مشكل وشاي شرقي أصيل." data-desc-en="Fava beans with olive oil, mixed pickles, and authentic oriental tea." data-price="£8.00" data-img="Chef’s Selection2.webp" data-allergy="Contains: Cereals containing Gluten (Wheat). May contain: Mustard, Sulphites, Sesame.">
+                    <span class="item-price">£8.00</span>
+                    <img src="Chef’s Selection2.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Dish+Of+The+Day'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Dish of the Day</div>
+                        <div class="mini-name-ar">طبق اليوم</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="تشكيلة فاخرة  لشخص واحد." data-name-en=" Single‑Serving Selection" data-desc-ar="تجربة أصيلة تجمع نكهات المطبخ الدمشقي في تقديم فاخر لشخص واحد." data-desc-en="An authentic experience offering a refined selection of Damascene flavors." data-price="£7.00" data-img=" Single‑Serving Selection.webp" data-allergy="Gluten (Wheat), Milk (Ghee/Yogurt), Sesame,">
+                    <span class="item-price">£7.00</span>
+                    <img src=" Single‑Serving Selection.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Single+Selection'">
+                    <div class="mini-info">
+                        <div class="mini-name-en"> Single‑Serving Selection</div>
+                        <div class="mini-name-ar">تشكيلة فاخرة  لشخص واحد.</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="التشكيلة الفاخرة لشخصين  " data-name-en="Damascene Premium Set for Two " data-desc-ar="تجربة راقية تتضمن تشكيلة أنيقة من النكهات الدمشقية." data-desc-en="A refined experience featuring an elegant selection of Damascene flavors." data-price="£13.00" data-img="2 Serving Selection.webp" data-allergy="Gluten (Wheat), Milk (Ghee/Yogurt), Sesame,">
+                    <span class="item-price">£13.00</span>
+                    <img src="2 Serving Selection.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Set+For+Two'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Damascene Premium Set for Two </div>
+                        <div class="mini-name-ar">التشكيلة الفاخرة لشخصين  </div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="فتة بالزيت (تسقية)" data-name-en="Olive Oil Tesqiyeh" data-desc-ar="تسقية دمشقية أصيلة بالحمص والخبز المحمص، مغمورة بسخاء بزيت الزيتون البكر." data-desc-en="Authentic Damascene Tesqiyeh with chickpeas and toasted bread, generously drizzled with extra virgin olive oil." data-price="£7.00" data-img="Olive Oil Tesqiyeh.webp" data-allergy="Contains: Gluten (Wheat), Sesame.">
+                    <span class="item-price">£7.00</span>
+                    <img src="Olive Oil Tesqiyeh.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Tesqiyeh'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Olive Oil Tesqiyeh</div>
+                        <div class="mini-name-ar">فتة بالزيت (تسقية)</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="فتة بالسمنة والمكسرات" data-name-en="Ghee & Nuts Fatteh" data-desc-ar="فتة حمص دافئة باللبن، تتوجها طشة السمن الأصيل والمكسرات المحمصة المقرمشة." data-desc-en="Warm chickpea Fatteh with yogurt, crowned with sizzling authentic ghee and roasted crunchy nuts." data-price="£8.00" data-img="Nuts Fatteh.webp" data-allergy="Contains: Gluten (Wheat), Milk (Ghee/Yogurt), Sesame, Nuts.">
+                    <span class="item-price">£8.00</span>
+                    <img src="Nuts Fatteh.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Fatteh'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Ghee & Nuts Fatteh</div>
+                        <div class="mini-name-ar">فتة بالسمنة والمكسرات</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="فول بالزيت" data-name-en="Olive Oil Foul" data-desc-ar="فول مدمس محضر بالطريقة الشامية التقليدية، يقدم مع زيت الزيتون البكر والليمون المنعش." data-desc-en="Traditional Damascene-style fava beans, served with extra virgin olive oil and refreshing lemon." data-price="£7.00" data-img="Olive Oil Foul.webp" data-allergy="Free from common allergens.">
+                    <span class="item-price">£7.00</span>
+                    <img src="Olive Oil Foul.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Foul'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Olive Oil Foul</div>
+                        <div class="mini-name-ar">فول بالزيت</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="فول باللبن" data-name-en="Yogurt Foul" data-desc-ar="فول مدمس دافئ ممزوج بطحينة اللبن الغنية والثوم ولمسة من زيت الزيتون." data-desc-en="Warm fava beans beautifully blended with a rich yogurt-tahini sauce, garlic, and a touch of olive oil." data-price="£8.00" data-img="Yogurt Foul.webp" data-allergy="Contains: Gluten (Wheat), Milk (Ghee/Yogurt), Sesame (Tahini), Nuts.">
+                    <span class="item-price">£8.00</span>
+                    <img src="Yogurt Foul.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Foul'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Yogurt Foul</div>
+                        <div class="mini-name-ar">فول باللبن</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="حمص بالطحينة (مسبحة)" data-name-en="Tahini Musabaha" data-desc-ar="مسبحة دمشقية كريمية غنية بالطحينة وحبات الحمص الكاملة، مزينة بزيت الزيتون." data-desc-en="Creamy Damascene Musabaha rich in tahini and whole chickpeas, beautifully garnished with olive oil." data-price="£3.50" data-img="Tahini Musabaha.webp" data-allergy="Contains: Sesame (Tahini), Gluten (Wheat - from bread).">
+                    <span class="item-price">£3.50</span>
+                    <img src="Tahini Musabaha.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Musabaha'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Tahini Musabaha</div>
+                        <div class="mini-name-ar">حمص بالطحينة (مسبحة)</div>
+                    </div>
+                </div>
+                 <div class="item-card" onclick="openDetails(this)" data-name-ar="لبنة طازجة" data-name-en="Olive Oil Labneh" data-desc-ar="لبنة بلدية طازجة وناعمة، تقدم مع زيت الزيتون البكر لتجربة فطور خفيفة وصحية." data-desc-en="Smooth, freshly strained Labneh, served with extra virgin olive oil for a light and healthy breakfast experience." data-price="£3.50" data-img="Olive Oil Labneh.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
+                    <span class="item-price">£3.50</span>
+                    <img src="Olive Oil Labneh.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Labneh'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Olive Oil Labneh</div>
+                        <div class="mini-name-ar">لبنة طازجة</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="جبنة بيضاء بلدية" data-name-en="Authentic White Cheese" data-desc-ar="شرائح من الجبنة البلدية البيضاء الطازجة، تذوب في الفم بنكهتها السورية الأصيلة." data-desc-en="Slices of fresh, traditional white cheese, melting in your mouth with its authentic flavor." data-price="£3.50" data-img="Authentic White Cheese.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
+                    <span class="item-price">£3.50</span>
+                    <img src="Authentic White Cheese.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=White+Cheese'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Authentic White Cheese</div>
+                        <div class="mini-name-ar">جبنة بيضاء بلدية</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="جبنة شلل" data-name-en="Nigella Shallal Cheese" data-desc-ar="خيوط جبنة الشلل السورية المجدولة بعناية، والمزينة بحبة البركة السوداء العطرية." data-desc-en="Meticulously braided strings of Syrian Shallal cheese, beautifully garnished with nigella seeds." data-price="£3.50" data-img="Shallal Cheese.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
+                    <span class="item-price">£3.50</span>
+                    <img src="Shallal Cheese.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Shallal+Cheese'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Nigella Shallal Cheese</div>
+                        <div class="mini-name-ar">جبنة شلل</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar=" قطع 3 جبنة حلومي مقلية" data-name-en="Fried Halloumi Cheese" data-desc-ar="شرائح من جبنة الحلومي المقلية للون الذهبي، مقرمشة من الخارج ودافئة وطرية من الداخل." data-desc-en="Slices of Halloumi cheese fried to a golden crisp, crunchy on the outside and soft on the inside." data-price="£3.50" data-img="Halloumi.webp" data-allergy="Contains: Milk, Gluten (Wheat - from bread).">
+                    <span class="item-price">£3.50</span>
+                    <img src="Halloumi.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Fried+Halloumi'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Fried Halloumi Cheese</div>
+                        <div class="mini-name-ar">جبنة حلومي مقلية</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="زيتون أخضر" data-name-en="Natural Green Olives" data-desc-ar="حبات الزيتون الأخضر الشامي المنتقاة بعناية، متبلة بخلطة خفيفة ومشهية." data-desc-en="Carefully selected Damascene green olives, lightly marinated for an appetizing flavor." data-price="£3.50" data-img="Green Olives.webp" data-allergy="Free from common allergens. Contains Gluten (Wheat) from bread.">
+                    <span class="item-price">£3.50</span>
+                    <img src="Green Olives.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Green+Olives'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Natural Green Olives</div>
+                        <div class="mini-name-ar">زيتون أخضر</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="زيتون أسود" data-name-en="Natural Black Olives" data-desc-ar="زيتون أسود معتق وغني بالنكهات، يكمل مائدة الإفطار الدمشقية بامتياز." data-desc-en="Rich, aged black olives that perfectly complement the authentic Damascene breakfast table." data-price="£3.50" data-img="Black Olives.webp" data-allergy="Free from common allergens. Contains Gluten (Wheat) from bread.">
+                    <span class="item-price">£3.50</span>
+                    <img src="Black Olives.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Black+Olives'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Natural Black Olives</div>
+                        <div class="mini-name-ar">زيتون أسود</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="مكدوس شامي" data-name-en="Walnut Makdous" data-desc-ar="حبات باذنجان صغيرة محشوة بالجوز والفليفلة والثوم، ومغمورة بزيت الزيتون الصافي." data-desc-en="Baby eggplants stuffed with walnuts, capsicum, and garlic, fully submerged in pure olive oil." data-price="£6.00" data-img="Walnut Makdous.webp" data-allergy="Contains: Nuts (Walnut), Gluten (Wheat) from bread.">
+                    <span class="item-price">£6.00</span>
+                    <img src="Walnut Makdous.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Makdous'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Walnut Makdous</div>
+                        <div class="mini-name-ar">مكدوس شامي</div>
+                    </div>
+                </div>
+              <div class="item-card" onclick="openDetails(this)" data-name-ar="زعتر أحمر/أخضر حلبي" data-name-en="Sesame Red/Green Zaatar" data-desc-ar="خلطة الزعتر الأخضر الأصيلة الممزوجة بالسمسم المحمص والسماق لنكهة لا تقاوم." data-desc-en="A classic Aleppian blend of green thyme mixed with roasted sesame seeds and sumac." data-price="£3.50" data-img="Zaatar.webp" data-allergy="Contains: Sesame, Gluten (Wheat - from bread).">
+                    <span class="item-price">£3.50</span>
+                    <img src="Zaatar.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Green+Zaatar'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Sesame Red/Green Zaatar</div>
+                        <div class="mini-name-ar">زعتر احمر/أخضر حلبي</div>
+                    </div>
+                </div>
+              <div class="item-card" onclick="openDetails(this)" data-name-ar="حلاوة بالطحينة مع الزبدة" data-name-en="Butter Tahini Halawa" data-desc-ar="حلاوة طحينية فاخرة تقدم مع قطع الزبدة الطازجة لتجربة فطور حلوة ومغذية." data-desc-en="Luxurious tahini Halawa served with fresh butter cubes for a sweet and nourishing bite." data-price="£3.50" data-img="Tahini Halawa.webp" data-allergy="Contains: Sesame (Tahini), Milk (Butter), Gluten (Wheat - from bread).">
+                    <span class="item-price">£3.50</span>
+                    <img src="Tahini Halawa.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Halawa'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Butter Tahini Halawa</div>
+                        <div class="mini-name-ar">حلاوة بالطحينة مع الزبدة</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى التوت الشامي" data-name-en="Damascene Berry Jam" data-desc-ar="مربى التوت الشامي الأصلي، مطبوخ بعناية ليحافظ على قوام وحلاوة الحبات الطبيعية." data-desc-en="Authentic Damascene berry jam, carefully cooked to preserve the texture and natural sweetness of the berries." data-price="£3.50" data-img="Berry Jam.webp" data-allergy="Free from common allergens.">
+                    <span class="item-price">£3.50</span>
+                    <img src="Berry Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Berry+Jam'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Damascene Berry Jam</div>
+                        <div class="mini-name-ar">مربى التوت الشامي</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى المشمش" data-name-en="Syrian Apricot Jam" data-desc-ar="مربى ذهبي محضر من أجود ثمار المشمش السوري بنكهة الصيف الرائعة." data-desc-en="Golden apricot jam prepared from the finest Syrian apricots, capturing the delightful taste of summer." data-price="£3.50" data-img="Apricot Jam.webp" data-allergy="Free from common allergens.">
+                    <span class="item-price">£3.50</span>
+                    <img src="Apricot Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Apricot+Jam'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Syrian Apricot Jam</div>
+                        <div class="mini-name-ar">مربى المشمش</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى النارنج" data-name-en="Bitter Orange Jam" data-desc-ar="مربى النارنج الدمشقي العريق، توازن مذهل بين الحلاوة ونكهة الحمضيات المنعشة." data-desc-en="Classic Damascene bitter orange jam, offering a stunning balance between sweetness and refreshing citrus flavor." data-price="£5.50" data-img="Bitter Orange Jam.webp" data-allergy="Free from common allergens.">
+                    <span class="item-price">£5.50</span>
+                    <img src="Bitter Orange Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Bitter+Orange+Jam'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Bitter Orange Jam</div>
+                        <div class="mini-name-ar">مربى النارنج</div>
+                    </div>
+                </div>
+                <div class="item-card" onclick="openDetails(this)" data-name-ar="مربى الكباد" data-name-en="Citron Jam" data-desc-ar="مربى الكباد (الأترج) النادر، يقدم نكهة حمضية عطرية فريدة من نوعها وتذوب بالفم." data-desc-en="Rare citron jam, delivering a unique and profoundly aromatic citrus flavor profile." data-price="£5.50" data-img="Citron Jam.webp" data-allergy="Free from common allergens.">
+                    <span class="item-price">£5.50</span>
+                    <img src="Citron Jam.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Citron+Jam'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Citron Jam</div>
+                        <div class="mini-name-ar">مربى الكباد</div>
+                    </div>
+                </div>
+     <div class="item-card" onclick="openDetails(this)" data-name-ar="زبدة" data-name-en="Creamy Butter" data-desc-ar="زبدة طازجة غنية لترافق أطباق الفطور المفضلة لديك." data-desc-en="Rich fresh butter to accompany your favorite breakfast dishes." data-price="£1.25" data-img="Butter Creamy.webp" data-allergy="Contains: Milk.">
+                    <span class="item-price">£1.25</span>
+                    <img src="Butter Creamy.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Butter'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Creamy Butter</div>
+                        <div class="mini-name-ar">زبدة</div>
+                    </div>
+                </div>
+     <div class="item-card" onclick="openDetails(this)" data-name-ar="مخلل مشكل" data-name-en="Vegetable Mix Pickles" data-desc-ar="مخلل مشكل مقرمش بخلطتنا السورية الخاصة." data-desc-en="Crunchy mixed pickles with our special Syrian blend." data-price="£3.50" data-img="Mix Pickles.webp" data-allergy="May contain traces of celery or mustard.">
+                    <span class="item-price">£3.50</span>
+                    <img src="Mix Pickles.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Pickles'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Vegetable Mix Pickles</div>
+                        <div class="mini-name-ar">مخلل مشكل</div>
+                    </div>
+                </div>
+    <div class="item-card" onclick="openDetails(this)" data-name-ar="خضار مشكلة" data-name-en="Vegetable Mix" data-desc-ar="مزيج طازج ومنعش من أجود أنواع الخضروات الموسمية المختارة بعناية." data-desc-en="A fresh and refreshing selection of premium seasonal vegetables, carefully curated." data-price="£3.50" data-img="Vegetable Mix.webp" data-allergy="Free from common allergens.">
+                    <span class="item-price">£3.50</span>
+                    <img src="Vegetable Mix.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Vegetables'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Vegetable Mix</div>
+                        <div class="mini-name-ar">خضار مشكلة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="next-section-btn" onclick="resetSubMenu()" style="margin-top: 30px;">
+                ⬅️ عودة لخيارات الأطباق | Back to Options
+            </button>
+        </div>
+
+        <!-- DINNER SUB-SECTION -->
+        <div id="sub-dinner" class="sub-menu-section" style="display: none;">
+            <div class="item-grid">
+                <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="برك باللحمة 4قطع" data-name-en="4 pis. Meat Burek" data-desc-ar="رقائق ذهبية محشوة بلحمة متبّلة بعناية، تُقدَّم بقرمشة فاخرة ونكهة شرقية أصيلة." data-desc-en="Golden pastry flakes carefully filled with seasoned meat, served with premium crunch and authentic oriental flavor." data-price="£7.00" data-img="Meat Burek2.webp" data-allergy="Contains: Gluten (Wheat), Meat.">
+                    <span class="item-price">£7.00</span>
+                    <img src="Meat Burek2.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Meat+Burek'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">4 pis. Meat Burek</div>
+                        <div class="mini-name-ar">برك باللحمة 4قطع</div>
+                    </div>
+                </div>
+
+                <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="برك بالجبنة 4 قطع" data-name-en="4 pis. Cheese Burek" data-desc-ar="عجينة هشة تحتضن جبنة كريمية ناعمة، بطعم غني يذوب بسلاسة مع كل قضمة." data-desc-en="Flaky dough embracing smooth cream cheese, with a rich taste that melts smoothly with every bite." data-price="£7.00" data-img="Meat Burek.webp" data-allergy="Contains: Milk (Cheese), Gluten (Wheat).">
+                    <span class="item-price">£7.00</span>
+                    <img src="Meat Burek.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Cheese+Burek'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">4 pis. Cheese Burek</div>
+                        <div class="mini-name-ar">برك بالجبنة 4 قطع</div>
+                    </div>
+                </div>
+
+                <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كبة باللحمة 3 قطع" data-name-en="3 pis.Meat Kibbeh" data-desc-ar="كبة شامية محشوة بلحمة طرية ومحمّصة، بنكهة متوازنة تجمع الأصالة والفخامة." data-desc-en="Damascene Kibbeh stuffed with tender roasted meat, offering a balanced flavor of authenticity and luxury." data-price="£7.00" data-img="Meat Kibbeh 2.webp" data-allergy="Contains: Gluten (Wheat/Bulgur), Meat, Nuts.">
+                    <span class="item-price">£7.00</span>
+                    <img src="Meat Kibbeh 2.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Meat+Kibbeh'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">3 pis.Meat Kibbeh</div>
+                        <div class="mini-name-ar">كبة باللحمة 3 قطع</div>
+                    </div>
+                </div>
+
+                <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="2 أوزي باللحمة والمكسرات" data-name-en="2 Ouzi with Meat and Nuts" data-desc-ar="أرز فاخر مع لحمة ناعمة ومزيج مكسرات محمّصة، يقدم بتجربة شرقية راقية." data-desc-en="Premium rice with soft meat and a mix of roasted nuts, offering a refined oriental experience." data-price="£12.00" data-img="Ouzi with Meat & Nuts2.webp" data-allergy="Contains: Meat, Nuts, Milk (Ghee).">
+                    <span class="item-price">£12.00</span>
+                    <img src="Ouzi with Meat & Nuts2.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Ouzi'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">2 Ouzi with Meat and Nuts</div>
+                        <div class="mini-name-ar">2 أوزي باللحمة والمكسرات</div>
+                    </div>
+                </div>
+
+                <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="6 ورق عنب بالزيت" data-name-en="6 Stuffed Vine Leaves in Olive Oil" data-desc-ar="ورق عنب محشو بنكهات متوازنة، مطهو بزيت الزيتون ليمنحك طراوة فاخرة ولمسة شامية أصيلة." data-desc-en="Vine leaves stuffed with balanced flavors, cooked in olive oil to give you luxurious tenderness and an authentic Damascene touch." data-price="£7.00" data-img="Stuffed Vine Leaves  .webp" data-allergy="Free from common allergens.">
+                    <span class="item-price">£7.00</span>
+                    <img src="Stuffed Vine Leaves  .webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Vine+Leaves'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">6 Stuffed Vine Leaves</div>
+                        <div class="mini-name-ar">6 ورق عنب بالزيت</div>
+                    </div>
+                </div>
+<div class="item-card is-new" onclick="openDetails(this)" data-name-ar="وجبة ملكية من مطبخ دمشق" data-name-en="Damascus Heritage Dinner" data-desc-ar="تشكيلة دمشقية فاخرة برك ، الكبة شامية، أوزي بالحمة، وورق العنب  مع لبن زبادي ." data-desc-en=" luxurious Damascene selection of burek, Levantine kibbeh, ouzi with meat, and vine leaves served with yogurt." data-price="£20.00" data-img="Damascene Heritage Dinner.webp" data-allergy="Gluten (Wheat/Bulgur), Meat, Nuts, Milk.">
+                    <span class="item-price">£20.00</span>
+                    <img src="Damascus Heritage Dinner3.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Vine+Leaves'">
+                    <div class="mini-info">
+                        <div class="mini-name-en">Damascus Heritage Dinner</div>
+                        <div class="mini-name-ar">وجبة ملكية من مطبخ دمشق</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="next-section-btn" onclick="resetSubMenu()" style="margin-top: 30px;">
+                ⬅️ عودة لخيارات الأطباق | Back to Options
+            </button>
+        </div>
+
         <button class="next-section-btn" onclick="goToSection('sweets-merged')">
             Next: Sweets <i class="fas fa-arrow-right"></i>
         </button>
@@ -684,8 +810,8 @@
 
     <div id="sweets-merged" class="menu-section">
         <h2 class="section-title">
-            .جميع الأطباق تحتوي على مواد مسببة للحساسية
-            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens.Please inform staff of any dietary needs.</span>
+            جميع الأطباق تحتوي على مواد مسببة للحساسية
+            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens. Please inform staff of any dietary needs.</span>
         </h2>
         <div class="item-grid">
             <div class="item-card" onclick="openDetails(this)" data-name-ar="مدلوقة بالقشطة" data-name-en="Cream Madlouka" data-desc-ar="مزيج فاخر من السميد المحمص بخلاصة ماء الزهر، يعلوه طبقة غنية من القشطة الطازجة والفستق الحلبي." data-desc-en="A luxurious blend of roasted semolina with orange blossom extract, topped with a rich layer of fresh cream and pistachios." data-price="£8.00" data-img="madlouka.webp" data-allergy="Contains: Milk, Gluten (Wheat), Nuts (Pistachio).">
@@ -921,8 +1047,8 @@
 
     <div id="drinks-merged" class="menu-section">
         <h2 class="section-title">
-           .جميع الأطباق تحتوي على مواد مسببة للحساسية
-            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens.Please inform staff of any dietary needs.</span>
+           جميع الأطباق تحتوي على مواد مسببة للحساسية
+            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens. Please inform staff of any dietary needs.</span>
         </h2>
         <div class="item-grid">
             <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="ميلك شيك بوظة عربي دق" data-name-en="Syrian ice cream milkshake" data-desc-ar="ميلك شيك بوظة شامية أصيلة، بمزيج غني وكريمي يمنحك طعماً فاخراً ولمسة تقليدية لا تُقاوم." data-desc-en="Authentic Damascene ice cream milkshake, a rich and creamy blend offering a luxurious taste and irresistible traditional touch." data-price="£6.00" data-img="Syrian ice cream milkshake.webp" data-allergy="Contains: Milk.">
@@ -1207,8 +1333,8 @@
 
     <div id="cake-ice" class="menu-section">
         <h2 class="section-title">
-            .جميع الأطباق تحتوي على مواد مسببة للحساسية
-            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens.Please inform staff of any dietary needs.</span>
+             جميع الأطباق تحتوي على مواد مسببة للحساسية
+            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens. Please inform staff of any dietary needs.</span>
         </h2>
         <div class="item-grid">
             
@@ -1248,8 +1374,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك فراولة" data-name-en="Strawberry Cake" data-desc-ar="كيكة إسفنجية خفيفة تتخللها طبقات من كريمة الفانيليا وقطع الفراولة الطازجة." data-desc-en="Light sponge cake layered with vanilla cream and fresh strawberry pieces." data-price="£7.00" data-img="strawberry-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
-                <span class="item-price">£7.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك فراولة" data-name-en="Strawberry Cake" data-desc-ar="كيكة إسفنجية خفيفة تتخللها طبقات من كريمة الفانيليا وقطع الفراولة الطازجة." data-desc-en="Light sponge cake layered with vanilla cream and fresh strawberry pieces." data-price="£6.00" data-img="strawberry-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
+                <span class="item-price">£6.00</span>
                 <img src="strawberry-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Strawberry+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Strawberry Cake</div>
@@ -1257,8 +1383,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك توت بري" data-name-en="Blueberry Cake" data-desc-ar="كيكة التوت البري المنعشة، مخبوزة بعناية ومغطاة بطبقة غنية من كريمة التوت." data-desc-en="Refreshing blueberry cake, carefully baked and frosted with a rich layer of blueberry cream." data-price="£7.00" data-img="blueberry-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
-                <span class="item-price">£7.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك توت بري" data-name-en="Blueberry Cake" data-desc-ar="كيكة التوت البري المنعشة، مخبوزة بعناية ومغطاة بطبقة غنية من كريمة التوت." data-desc-en="Refreshing blueberry cake, carefully baked and frosted with a rich layer of blueberry cream." data-price="£6.00" data-img="blueberry-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
+                <span class="item-price">£6.00</span>
                 <img src="blueberry-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Blueberry+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Blueberry Cake</div>
@@ -1266,8 +1392,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك فستق" data-name-en="Pistachio Cake" data-desc-ar="كيكة الفستق الحلبي الملكية، مشبعة بالنكهة الأصيلة ومزينة بالمكسرات الفاخرة." data-desc-en="Royal pistachio cake, infused with authentic flavor and decorated with premium nuts." data-price="£7.00" data-img="pistachio-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Nuts (Pistachio).">
-                <span class="item-price">£7.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك فستق" data-name-en="Pistachio Cake" data-desc-ar="كيكة الفستق الحلبي الملكية، مشبعة بالنكهة الأصيلة ومزينة بالمكسرات الفاخرة." data-desc-en="Royal pistachio cake, infused with authentic flavor and decorated with premium nuts." data-price="£6.00" data-img="pistachio-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Nuts (Pistachio).">
+                <span class="item-price">£6.00</span>
                 <img src="pistachio-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Pistachio+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Pistachio Cake</div>
@@ -1275,8 +1401,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك ليمون" data-name-en="Lemon Cake" data-desc-ar="كيكة الليمون المنعشة بخفة لا تُضاهى، تعلوها طبقة ناعمة من صلصة الليمون الحامضة والحلوة." data-desc-en="Refreshingly light lemon cake, topped with a smooth, perfectly balanced sweet and tart lemon glaze." data-price="£7.00" data-img="lemon-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
-                <span class="item-price">£7.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك ليمون" data-name-en="Lemon Cake" data-desc-ar="كيكة الليمون المنعشة بخفة لا تُضاهى، تعلوها طبقة ناعمة من صلصة الليمون الحامضة والحلوة." data-desc-en="Refreshingly light lemon cake, topped with a smooth, perfectly balanced sweet and tart lemon glaze." data-price="£6.00" data-img="lemon-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
+                <span class="item-price">£6.00</span>
                 <img src="lemon-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Lemon+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Lemon Cake</div>
@@ -1284,8 +1410,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك مانجو" data-name-en="Mango Cake" data-desc-ar="كيكة استوائية غنية بقطع المانجو الطازجة والكريمة المخملية التي تذوب في الفم." data-desc-en="Tropical cake rich with fresh mango pieces and velvety cream that melts in your mouth." data-price="£7.00" data-img="mango-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
-                <span class="item-price">£7.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك مانجو" data-name-en="Mango Cake" data-desc-ar="كيكة استوائية غنية بقطع المانجو الطازجة والكريمة المخملية التي تذوب في الفم." data-desc-en="Tropical cake rich with fresh mango pieces and velvety cream that melts in your mouth." data-price="£6.00" data-img="mango-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
+                <span class="item-price">£6.00</span>
                 <img src="mango-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Mango+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Mango Cake</div>
@@ -1293,8 +1419,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك قهوة موكا" data-name-en="Mocha Cake" data-desc-ar="كيكة القهوة والشوكولاتة لعشاق الموكا، مزيج مثالي بين الكاكاو الغني والإسبريسو." data-desc-en="Coffee and chocolate cake for mocha lovers, a perfect blend of rich cocoa and espresso." data-price="£7.00" data-img="mocha-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
-                <span class="item-price">£7.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك قهوة موكا" data-name-en="Mocha Cake" data-desc-ar="كيكة القهوة والشوكولاتة لعشاق الموكا، مزيج مثالي بين الكاكاو الغني والإسبريسو." data-desc-en="Coffee and chocolate cake for mocha lovers, a perfect blend of rich cocoa and espresso." data-price="£6.00" data-img="mocha-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
+                <span class="item-price">£6.00</span>
                 <img src="mocha-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Mocha+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Mocha Cake</div>
@@ -1302,8 +1428,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك تفاح" data-name-en="Apple Cake" data-desc-ar="كيكة التفاح الدافئة بلمسة من القرفة العطرية، تقدم طعماً يذكرك بأجواء المنزل." data-desc-en="Warm apple cake with a touch of aromatic cinnamon, offering a comforting, homestyle taste." data-price="£7.00" data-img="apple-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
-                <span class="item-price">£7.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك تفاح" data-name-en="Apple Cake" data-desc-ar="كيكة التفاح الدافئة بلمسة من القرفة العطرية، تقدم طعماً يذكرك بأجواء المنزل." data-desc-en="Warm apple cake with a touch of aromatic cinnamon, offering a comforting, homestyle taste." data-price="£6.00" data-img="apple-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat).">
+                <span class="item-price">£6.00</span>
                 <img src="apple-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Apple+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Apple Cake</div>
@@ -1311,8 +1437,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك الجزر والجوز" data-name-en="Carrot & Walnut Cake" data-desc-ar="كيكة الجزر الهشة الغنية بالجوز المحمص والتوابل الدافئة مع تغطية الجبن الكريمي." data-desc-en="Moist carrot cake rich with roasted walnuts and warm spices, finished with cream cheese frosting." data-price="£5.00" data-img="carrot-walnut-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Nuts (Walnut).">
-                <span class="item-price">£5.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك الجزر والجوز" data-name-en="Carrot & Walnut Cake" data-desc-ar="كيكة الجزر الهشة الغنية بالجوز المحمص والتوابل الدافئة مع تغطية الجبن الكريمي." data-desc-en="Moist carrot cake rich with roasted walnuts and warm spices, finished with cream cheese frosting." data-price="£6.00" data-img="carrot-walnut-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Nuts (Walnut).">
+                <span class="item-price">£6.00</span>
                 <img src="carrot-walnut-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Carrot+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Carrot & Walnut Cake</div>
@@ -1320,8 +1446,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك ريد فيلفت" data-name-en="Red Velvet Cake" data-desc-ar="كيكة الريد فيلفت المخملية الشهيرة، تتوجها طبقة كثيفة ولذيذة من كريمة الجبن." data-desc-en="The famous velvety Red Velvet cake, crowned with a thick, delicious layer of cream cheese frosting." data-price="£5.00" data-img="red-velvet-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
-                <span class="item-price">£5.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك ريد فيلفت" data-name-en="Red Velvet Cake" data-desc-ar="كيكة الريد فيلفت المخملية الشهيرة، تتوجها طبقة كثيفة ولذيذة من كريمة الجبن." data-desc-en="The famous velvety Red Velvet cake, crowned with a thick, delicious layer of cream cheese frosting." data-price="£6.00" data-img="red-velvet-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
+                <span class="item-price">£6.00</span>
                 <img src="red-velvet-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Red+Velvet'">
                 <div class="mini-info">
                     <div class="mini-name-en">Red Velvet Cake</div>
@@ -1329,8 +1455,8 @@
                 </div>
             </div>
 
-            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك الشوكولاتة" data-name-en="Pure Chocolate Cake" data-desc-ar="كيكة الشوكولاتة الخالصة، طبقات غنية وكثيفة من الشوكولاتة الفاخرة لعشاق الكاكاو." data-desc-en="Pure chocolate cake, featuring dense and rich layers of premium chocolate for cocoa enthusiasts." data-price="£5.00" data-img="pure-chocolate-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
-                <span class="item-price">£5.00</span>
+            <div class="item-card is-new" onclick="openDetails(this)" data-name-ar="كيك الشوكولاتة" data-name-en="Pure Chocolate Cake" data-desc-ar="كيكة الشوكولاتة الخالصة، طبقات غنية وكثيفة من الشوكولاتة الفاخرة لعشاق الكاكاو." data-desc-en="Pure chocolate cake, featuring dense and rich layers of premium chocolate for cocoa enthusiasts." data-price="£6.00" data-img="pure-chocolate-cake.webp" data-allergy="Contains: Milk, Eggs, Gluten (Wheat), Soya.">
+                <span class="item-price">£6.00</span>
                 <img src="pure-chocolate-cake.webp" class="item-image" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/300x220/141414/C5A059?text=Chocolate+Cake'">
                 <div class="mini-info">
                     <div class="mini-name-en">Pure Chocolate Cake</div>
@@ -1487,9 +1613,9 @@
     </div>
 
     <div id="fruit-juice" class="menu-section">
-        <h2 class="section-title">س
-           .جميع الأطباق تحتوي على مواد مسببة للحساسية
-            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens.Please inform staff of any dietary needs.</span>
+        <h2 class="section-title">
+           جميع الأطباق تحتوي على مواد مسببة للحساسية
+            <span class="section-subtitle-en">Allergy Notice: All dishes contain allergens. Please inform staff of any dietary needs.</span>
         </h2>
         <div class="item-grid">
                         <div class="item-card" onclick="openDetails(this)" data-name-ar="عصير أناناس وليمون" data-name-en="Pineapple & Lemon Juice" data-desc-ar="مزيج استوائي منعش يجمع ببراعة بين حلاوة الأناناس الطبيعية وحموضة الليمون ليروي عطشك." data-desc-en="A refreshing tropical mix that masterfully combines the natural sweetness of pineapple with the tartness of lemon to quench your thirst." data-price="£5.00" data-img="coming soon.webp" data-allergy="Free from common allergens.">
@@ -1609,7 +1735,7 @@
 
 <footer>
     <img src="logo.webp" alt="Kweider Logo" class="footer-logo" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/120/000000/C5A059?text=KWEIDER'">
-    <div class="footer-title en-text" style="direction: ltr;">Kweider Damascene Sweets</div>
+    <div class="footer-title en-text" style="direction: ltr;">Kweider Sweets</div>
     <div class="footer-title ar-text" style="font-size: 16px;">قـويـدر للحلويات الدمشقية</div>
     <div class="footer-text">📍 London,184-186 High Street, Acton, W3 9NH <br>Authentic Damascene Taste Since 1969</div>
     <div class="footer-text">🕒 Opening Hours: 11:00 AM - 10:00 PM</div>
@@ -1642,12 +1768,13 @@ const allergens = [
         'Nuts', 'Pistachio', 'Walnut', 'Almond', 'Pine Nuts', 'Mixed Nuts', 'Hazelnut', 
         'Gluten', 'Wheat', 'Semolina', 'Bulgur', 
         'Soya', 'Soy', 
-        'Eggs', 'Egg'
+        'Eggs', 'Egg',
+        'Meat'
     ];
 
     document.addEventListener("DOMContentLoaded", function() {
         const firstBtn = document.querySelector('.cat-btn');
-        if (firstBtn) filterMenu('breakfast', firstBtn, false);
+        if (firstBtn) filterMenu('damascene-dishes', firstBtn, false);
 
         const navBar = document.querySelector('.categories-bar');
         const header = document.querySelector('header');
@@ -1694,6 +1821,29 @@ const allergens = [
         modalImgElement.classList.remove('img-zoomed'); 
     });
 
+    /* --- NEW JS FUNCTIONS FOR SUB-NAVIGATION --- */
+    function filterSubMenu(subId, btn) {
+        // Hide all sub-sections
+        document.querySelectorAll('.sub-menu-section').forEach(el => el.style.display = 'none');
+        // Remove active class from sub-buttons
+        document.querySelectorAll('.sub-cat-btn').forEach(b => b.classList.remove('active'));
+        
+        // Show selected sub-section
+        if(subId) {
+            document.getElementById(subId).style.display = 'block';
+            if(btn) btn.classList.add('active');
+        }
+    }
+
+    function resetSubMenu() {
+        filterSubMenu(null, null); // Hide sub-items, show only buttons
+        // Smooth scroll back to the Damascene Dishes section
+        const navBarHeight = document.querySelector('.categories-bar').offsetHeight;
+        const offsetPosition = document.getElementById('damascene-dishes').offsetTop - navBarHeight - 20;
+        window.scrollTo({top: offsetPosition, behavior: 'smooth'});
+    }
+
+    /* --- UPDATED MAIN FILTER MENU --- */
     function filterMenu(category, btn, shouldScroll = true) {
         const sections = document.querySelectorAll('.menu-section');
         const buttons = document.querySelectorAll('.cat-btn');
@@ -1718,6 +1868,11 @@ const allergens = [
             }
         });
         
+        // Automatically reset sub-navigation when clicking "Damascene Dishes"
+        if (category === 'damascene-dishes') {
+            filterSubMenu(null, null);
+        }
+
         if (shouldScroll) {
             const navBarHeight = document.querySelector('.categories-bar').offsetHeight;
             const offsetPosition = document.getElementById('main-menu').offsetTop - navBarHeight - 20;
